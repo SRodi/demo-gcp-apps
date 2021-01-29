@@ -25,13 +25,21 @@
 #   kubectl apply -f samples/bookinfo/platform/kube/bookinfo.yaml -l account=reviews # reviews ServiceAccount
 #   kubectl apply -f samples/bookinfo/platform/kube/bookinfo.yaml -l app=reviews,version=v3 # reviews-v3 Deployment
 ##################################################################################################
-
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: bookinfo
+  labels:
+    istio-injection: enabled
+---
 ##################################################################################################
 # Details service
 ##################################################################################################
 apiVersion: v1
 kind: Service
 metadata:
+  namespace: bookinfo
   name: details
   labels:
     app: details
@@ -46,6 +54,7 @@ spec:
 apiVersion: v1
 kind: ServiceAccount
 metadata:
+  namespace: bookinfo
   name: bookinfo-details
   labels:
     account: details
@@ -53,6 +62,7 @@ metadata:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  namespace: bookinfo
   name: details-v1
   labels:
     app: details
@@ -83,6 +93,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
+  namespace: bookinfo
   name: ratings
   labels:
     app: ratings
@@ -97,6 +108,7 @@ spec:
 apiVersion: v1
 kind: ServiceAccount
 metadata:
+  namespace: bookinfo
   name: bookinfo-ratings
   labels:
     account: ratings
@@ -104,6 +116,7 @@ metadata:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  namespace: bookinfo
   name: ratings-v1
   labels:
     app: ratings
@@ -134,6 +147,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
+  namespace: bookinfo
   name: reviews
   labels:
     app: reviews
@@ -148,6 +162,7 @@ spec:
 apiVersion: v1
 kind: ServiceAccount
 metadata:
+  namespace: bookinfo
   name: bookinfo-reviews
   labels:
     account: reviews
@@ -155,6 +170,7 @@ metadata:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  namespace: bookinfo
   name: reviews-v1
   labels:
     app: reviews
@@ -195,6 +211,7 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  namespace: bookinfo
   name: reviews-v2
   labels:
     app: reviews
@@ -235,6 +252,7 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  namespace: bookinfo
   name: reviews-v3
   labels:
     app: reviews
@@ -278,6 +296,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
+  namespace: bookinfo
   name: productpage
   labels:
     app: productpage
@@ -292,6 +311,7 @@ spec:
 apiVersion: v1
 kind: ServiceAccount
 metadata:
+  namespace: bookinfo
   name: bookinfo-productpage
   labels:
     account: productpage
@@ -299,6 +319,7 @@ metadata:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  namespace: bookinfo
   name: productpage-v1
   labels:
     app: productpage
