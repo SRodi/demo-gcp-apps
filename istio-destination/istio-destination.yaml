@@ -104,13 +104,13 @@ spec:
         subset: v1
         port:
           number: 80
-      weight: 100 # weighted destination rules
-#     - destination:
-#         host: srodi-service.simone.svc.cluster.local
-#         subset: v2
-#         port:
-#           number: 80
-#       weight: 10
+      weight: 90 # weighted destination rules
+    - destination:
+        host: srodi-service.simone.svc.cluster.local
+        subset: v2
+        port:
+          number: 80
+      weight: 10
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
@@ -122,6 +122,6 @@ spec:
   - name: v1
     labels:
       version: v1
-#   - name: v2
-#     labels:
-#       version: v2
+  - name: v2
+    labels:
+      version: v2
